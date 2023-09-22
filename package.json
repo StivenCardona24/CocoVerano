@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
-    "deploy": "npm ci && npm run buil && firebase deploy",
+    "deploy": "npm ci && npm run build && firebase deploy",
     "preview": "vite preview",
     "test:unit": "vitest",
     "build-only": "vite build",
