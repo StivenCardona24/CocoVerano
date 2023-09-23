@@ -8,5 +8,6 @@ export const useCounterStore = defineStore('counter', () => {
     count.value++
   }
 
+  const productos = [];
   return { count, doubleCount, increment }
 })

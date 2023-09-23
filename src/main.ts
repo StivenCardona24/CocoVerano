@@ -1,4 +1,5 @@
 import './assets/style.css'
+import './flowbite.ts';
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
