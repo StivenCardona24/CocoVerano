@@ -9,7 +9,7 @@
         'bg-info-600 hover:bg-info-800': props.type === 'info',
         'w-full': props.block,
         'rounded-full p-4': props.rounded,
-        'rounded-lg px-6 py-2': !props.rounded,
+        'rounded-lg px-6 py-2.5': !props.rounded,
       }"
       class="flex justify-center text-white tracking-wide font-semibold transition ease-in duration-100"
     >
