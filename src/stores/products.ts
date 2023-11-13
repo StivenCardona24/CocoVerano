@@ -1,6 +1,5 @@
-import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import { getDb } from '@/firebase'
+import { getDb, getStorage } from '@/firebase'
 import {
   collection,
   getDocs,
@@ -14,18 +13,17 @@ import {
   getDoc
 } from 'firebase/firestore'
 
-export const useProductStore = defineStore('products', () => {
- 
+import { ref, uploadBytes } from 'firebase/storage'
 
+export const useProductStore = defineStore('products', () => {
   const createProduct = async (product: any) => {
     const db = getDb()
     if (
-      product.name.trim() === '' ||
+      product.name === '' ||
       product.price <= 0 ||
-      product.description.trim() === '' ||
-      product.image.trim() === '' ||
-      product.category.trim() === '' ||
-      product.quantity <= 0
+      product.description === '' ||
+      product.images.lenght === 0 ||
+      product.category === ''
     ) {
       return
     }
@@ -53,35 +51,9 @@ export const useProductStore = defineStore('products', () => {
       deleted: false,
       id: docRef.id
     })
-
-    // const productExist = await getDocs(collection(db, 'products')).then((querySnapshot) => {
-    //   querySnapshot.forEach((doc) => {
-    //     if (doc.data().name === product.name) {
-    //       return true
-    //     }
-    //   })
-    //   return false
-    // })
-
-    // if (productExist) {
-    //   return
-    // }
-
-    // await addDoc(collection(db, 'products'), {
-    //   name: product.name,
-    //   price: product.price,
-    //   description: product.description,
-    //   image: product.image,
-    //   createdAt: serverTimestamp(),
-    //   available: true,
-    //   category: product.category,
-    //   quantity: product.quantity,
-    //   deleted: false
-    // })
   }
 
   const getProducts = async () => {
-   
     const db = getDb()
     const productsCollection = collection(db, 'products')
     const productsQuery = query(productsCollection, where('deleted', '==', false))
@@ -89,12 +61,12 @@ export const useProductStore = defineStore('products', () => {
     console.log(snapshot)
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const products = ref(<any[]>[])
+    const products: any[] = []
     snapshot.forEach((doc) => {
-      products.value.push(doc.data())
+      products.push(doc.data())
     })
 
-    return products.value
+    return products
   }
 
   const updateProduct = async (product: any) => {
@@ -131,12 +103,24 @@ export const useProductStore = defineStore('products', () => {
     return productSnap?.data()
   }
 
+  const saveImage = async (file: File) => {
+    // Create a reference to the storage bucket.
+    const storage = getStorage()
+    const storageRef = ref(storage, 'images/' + file.name)
+    // 'file' comes from the Blob or File API
+    await uploadBytes(storageRef, file)
+
+    return `
+      https://firebasestorage.googleapis.com/v0/b/cocoverano-8df51.appspot.com/o/images%2F${file.name}?alt=media
+      `
+  }
+
   return {
     createProduct,
     getProducts,
     updateProduct,
     deleteProduct,
     getProduct,
-
+    saveImage
   }
 })
