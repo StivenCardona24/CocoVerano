@@ -27,7 +27,7 @@ const { getProducts } = productStore;
 
 
 
-const products = ref([]);
+const products = ref(<any[]>[]);
 const loadingProducts = ref(false);
 
 onMounted(async () => {

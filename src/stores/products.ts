@@ -1,22 +1,23 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { getDb } from '@/firebase'
-import { collection, getDocs, addDoc, serverTimestamp, query, where, doc, setDoc } from 'firebase/firestore'
-
+import {
+  collection,
+  getDocs,
+  addDoc,
+  serverTimestamp,
+  query,
+  where,
+  doc,
+  setDoc,
+  Timestamp,
+  getDoc
+} from 'firebase/firestore'
 
 export const useProductStore = defineStore('products', () => {
-  const products = ref(<any[]>[])
+ 
 
-  const newProduct = ref({
-    name: '',
-    price: 0,
-    description: '',
-    image: '',
-    category: '',
-    quantity: 0
-  })
-
-  const addProduct = async (product: any) => {
+  const createProduct = async (product: any) => {
     const db = getDb()
     if (
       product.name.trim() === '' ||
@@ -29,7 +30,7 @@ export const useProductStore = defineStore('products', () => {
       return
     }
     const productsCollection = collection(db, 'products')
-    const docRef = doc(productsCollection);
+    const docRef = doc(productsCollection)
 
     const productExist = await getDocs(productsCollection).then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
@@ -40,7 +41,7 @@ export const useProductStore = defineStore('products', () => {
       return false
     })
 
-    if(productExist) {
+    if (productExist) {
       return
     }
 
@@ -50,9 +51,8 @@ export const useProductStore = defineStore('products', () => {
       updateAt: serverTimestamp(),
       available: true,
       deleted: false,
-      id: docRef.id,
-    });
-
+      id: docRef.id
+    })
 
     // const productExist = await getDocs(collection(db, 'products')).then((querySnapshot) => {
     //   querySnapshot.forEach((doc) => {
@@ -81,6 +81,7 @@ export const useProductStore = defineStore('products', () => {
   }
 
   const getProducts = async () => {
+   
     const db = getDb()
     const productsCollection = collection(db, 'products')
     const productsQuery = query(productsCollection, where('deleted', '==', false))
@@ -88,7 +89,7 @@ export const useProductStore = defineStore('products', () => {
     console.log(snapshot)
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-
+    const products = ref(<any[]>[])
     snapshot.forEach((doc) => {
       products.value.push(doc.data())
     })
@@ -96,5 +97,46 @@ export const useProductStore = defineStore('products', () => {
     return products.value
   }
 
-  return { products, newProduct, addProduct, getProducts }
+  const updateProduct = async (product: any) => {
+    const db = getDb()
+    const productDoc = doc(db, 'products', product.id)
+    setDoc(
+      productDoc,
+      {
+        ...product,
+        updatedAt: Timestamp.now().toDate()
+      },
+      { merge: true }
+    )
+  }
+
+  const deleteProduct = async (id: string) => {
+    const db = getDb()
+    const productDoc = doc(db, 'products', id)
+    setDoc(
+      productDoc,
+      {
+        deleted: true,
+        active: false,
+        updatedAt: Timestamp.now().toDate()
+      },
+      { merge: true }
+    )
+  }
+
+  const getProduct = async (id: string) => {
+    const db = getDb()
+    const productDoc = doc(db, 'products', id)
+    const productSnap = await getDoc(productDoc)
+    return productSnap?.data()
+  }
+
+  return {
+    createProduct,
+    getProducts,
+    updateProduct,
+    deleteProduct,
+    getProduct,
+
+  }
 })

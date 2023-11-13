@@ -18,7 +18,7 @@
 
         <!-- Contenido personalizado para el botón -->
         <template #action-button>
-            <t-button type="primary" block>
+            <t-button type="primary" block @click="createProduct">
                 <div class="flex items-center gap-x-2 text-sm md:text-lg">
                     <svg class="h-4 w-4 mr-2 mt-1" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -33,8 +33,14 @@
 </template>
 
 <script lang="ts" setup>
-
+import { useRouter } from 'vue-router';
 import headerTable from '@/components/general/HeaderTable.vue';
 import tButton from '@/components/general/T-Button.vue';
 import tInput from '@/components/general/T-Input.vue';
+
+
+const router = useRouter();
+const createProduct = () => {
+  router.push({ name: "manageProduct", params: { id: "new" } });
+};
 </script>

@@ -2,6 +2,7 @@ import { type FirebaseApp, initializeApp } from "firebase/app";
 import { type Analytics, getAnalytics } from "firebase/analytics";
 import { getFirestore, Firestore } from "firebase/firestore";
 import { getAuth, type Auth } from "firebase/auth";
+import { getStorage, type FirebaseStorage } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAQ2w2vKR1t47LryjwUtV7oxFQlDBZuUwQ",
@@ -14,7 +15,7 @@ const firebaseConfig = {
   measurementId: "G-DCNJ0QKGDG"
 };
 
-  let _app: FirebaseApp, _analytics: Analytics, _db: Firestore, _auth: Auth;
+  let _app: FirebaseApp, _analytics: Analytics, _db: Firestore, _auth: Auth, _storage: FirebaseStorage;
 
   function app() {
     if (!_app) {
@@ -43,10 +44,18 @@ const firebaseConfig = {
     }
     return _auth;
   }
+
+  function storage() {
+    if (!_storage) {
+      _storage = getStorage(app());
+    }
+    return _storage;
+  }
   
   export {
     app as getApp,
     analytics as getAnalytics,
     db as getDb,
     auth as getAuth,
+    storage as getStorage
   };
