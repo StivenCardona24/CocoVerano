@@ -10,7 +10,7 @@ import navbar from "./components/layouts/NavBar.vue";
 
     <navbar/>
     <sidebar/>
-    <main class="p-4 md:ml-64 h-auto pt-20">
+    <main class="p-4 md:ml-64 h-auto pt-36">
 
       <RouterView />
     </main>

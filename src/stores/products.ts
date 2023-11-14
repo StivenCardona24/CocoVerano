@@ -16,7 +16,10 @@ import {
 import { ref, uploadBytes } from 'firebase/storage'
 
 export const useProductStore = defineStore('products', () => {
+
   const createProduct = async (product: any) => {
+
+    console.log('entro')
     const db = getDb()
     if (
       product.name === '' ||
@@ -51,6 +54,8 @@ export const useProductStore = defineStore('products', () => {
       deleted: false,
       id: docRef.id
     })
+
+    
   }
 
   const getProducts = async () => {
@@ -89,7 +94,7 @@ export const useProductStore = defineStore('products', () => {
       productDoc,
       {
         deleted: true,
-        active: false,
+        available: false,
         updatedAt: Timestamp.now().toDate()
       },
       { merge: true }

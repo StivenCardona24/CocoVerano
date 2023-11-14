@@ -109,7 +109,7 @@
 
 
             </div>
-            <button @click="save" type="submit"
+            <button 
                 class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
                 Guardar Producto
             </button>
@@ -156,9 +156,13 @@ const loading = ref(false);
 
 const save = async () => {
     loading.value = true;
+    console.log(route.params.id)
+    console.log('hola1')
     if (route.params.id === "new") {
         await createProduct(product.value);
+        console.log('hola2')
     } else {
+        console.log('hola3')
         await updateProduct(product.value);
     }
     loading.value = false;

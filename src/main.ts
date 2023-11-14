@@ -8,11 +8,35 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 /* import specific icons */
 import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import { faList } from '@fortawesome/free-solid-svg-icons';
+import { faChartPie } from '@fortawesome/free-solid-svg-icons';
+import { faBagShopping } from '@fortawesome/free-solid-svg-icons';
+import { faUserGear } from '@fortawesome/free-solid-svg-icons';
+import { faFilter } from '@fortawesome/free-solid-svg-icons';
+import { faUserLock } from '@fortawesome/free-solid-svg-icons';
+import { faPerson, faPersonDress, faChild, faChildDress } from '@fortawesome/free-solid-svg-icons';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+
 
 
 /* add icons to the library */
 library.add(faUserSecret)
 library.add(faTrashCan)
+library.add(faList)
+library.add(faChartPie)
+library.add(faBagShopping)
+library.add(faUserGear)
+library.add(faFilter)
+library.add(faUserLock)
+library.add(faPerson)
+library.add(faPersonDress)
+library.add(faChild)
+library.add(faChildDress)
+library.add(faPlus)
+library.add(faTrash)
+library.add(faPenToSquare)
 
 
 import { createApp } from 'vue'
