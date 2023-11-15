@@ -29,6 +29,7 @@ import TTable from "@/components/general/T-Table.vue";
 
 
 
+
 import { useProductStore } from "@/stores/products";
 const productStore = useProductStore();
 const { getProducts, deleteProduct } = productStore;
@@ -49,6 +50,7 @@ onMounted(async () => {
     products.value = await getProducts();
     console.log(products.value);
     loadingProducts.value = false;
+
 });
 
 const headers = ref([

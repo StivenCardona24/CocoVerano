@@ -3,7 +3,7 @@
     <h1
       class="mt-10 text-center mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white"
     >
-      Nuestros Productos
+      {{ title }}
     </h1>
     <div class="flex justify-center flex-wrap">
       <div
@@ -58,21 +58,38 @@
 </template>
 
 <script lang="ts" setup>
-import { EventBus } from '@/utils/event-bus.js';
-import { ref, onMounted } from "vue";
+
+import { ref, onMounted, computed, capitalize } from "vue";
 import { useProductStore } from "@/stores/products";
+import { storeToRefs } from "pinia";
+import { useRoute } from "vue-router";
+import Category from '@/Interfaces/category';
 
 const productStore = useProductStore();
 const { getProducts } = productStore;
 
-const products = ref([]);
+const { products } = storeToRefs(productStore);
+
 const loadingProducts = ref(false);
+const route = useRoute();
+
+
+const title = computed(() => {
+  console.log(route.params.category);
+  if (!route.params.category) {
+    return "Nuestros Productos";
+  }
+  return capitalize(route.params.category.toString());
+});
+
 
 onMounted(async () => {
-  loadingProducts.value = true;
-  products.value = await getProducts();
-  console.log(products.value);
-  loadingProducts.value = false;
+  if (route.params.category) {
+        await getProducts({category: capitalize(route.params.category.toString())});
+    }
+    else {
+        await getProducts();
+    }
 });
 
 </script>

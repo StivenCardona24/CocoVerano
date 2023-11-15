@@ -10,12 +10,17 @@ import {
   doc,
   setDoc,
   Timestamp,
-  getDoc
+  getDoc,
+  or
 } from 'firebase/firestore'
 
-import { deleteObject, ref, uploadBytes } from 'firebase/storage'
+import { deleteObject, list, uploadBytes, ref } from 'firebase/storage'
+import { ref as vueRef } from 'vue'
 
 export const useProductStore = defineStore('products', () => {
+
+  const products = vueRef<any[]>([]);
+
   const createProduct = async (product: any) => {
     console.log('entro')
     const db = getDb()
@@ -81,20 +86,47 @@ export const useProductStore = defineStore('products', () => {
     }
   }
 
-  const getProducts = async () => {
+  const getProducts = async (filters?:any) => {
+
     const db = getDb()
     const productsCollection = collection(db, 'products')
-    const productsQuery = query(productsCollection, where('deleted', '==', false))
+    let productsQuery = query(productsCollection, where('deleted', '==', false))
+
+    if(filters){
+
+      if (filters.category) {
+        productsQuery = query(productsQuery, where('category', '==', filters.category));
+      }
+    
+      if (filters.price) {
+        productsQuery = query(productsQuery, where('price', '>=', filters.price));
+      }
+
+    }  
+
+
+
+    
     const snapshot = await getDocs(productsQuery)
     console.log(snapshot)
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const products: any[] = []
+    products.value = []
     snapshot.forEach((doc) => {
-      products.push(doc.data())
+      products.value.push(doc.data())
     })
 
-    return products
+    if (filters && (filters.S || filters.M || filters.L || filters.XL)) {
+      products.value = products.value.filter((product: any) => {
+        // Array de tallas que se están filtrando (por ejemplo, ['S', 'M', 'XL'])
+        const filteredSizes = ['S', 'M', 'L', 'XL'];
+    
+        // Verifica si al menos una de las tallas seleccionadas cumple con la condición
+        return filteredSizes.some((size) => filters[size] && product[size] >= 1);
+      });
+    }
+
+    return products.value
   }
 
   const updateProduct = async (product: any) => {
@@ -189,6 +221,7 @@ export const useProductStore = defineStore('products', () => {
     deleteProduct,
     getProduct,
     saveImage,
-    deleteImage
+    deleteImage,
+    products
   }
 })

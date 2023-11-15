@@ -43,30 +43,38 @@
           </button>
           <ul id="dropdown-categories" class="hidden py-2 space-y-2">
             <li>
-              <a href="#"
+              <router-link to="/products/Hombre">
+              <a href="#" @click="changeCategory('Hombre')"
                 class="flex items-center p-2 pl-11 w-full text-base font-medium text-primary-700 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                 <font-awesome-icon class="h-4 w-4 mr-2" :icon="['fas', 'person']" />
                 Hombre</a>
+              </router-link>
             </li>
             <li>
-              <a href="#"
+              <router-link to="/products/Mujer">
+              <a href="#" @click="changeCategory('Mujer')"
                 class="flex items-center p-2 pl-11 w-full text-base font-medium text-primary-700 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                 <font-awesome-icon class="h-4 w-4 mr-2" :icon="['fas', 'person-dress']" />
                 Mujer
               </a>
+            </router-link>
             </li>
             <li>
-              <a href="#"
+              <router-link to="/products/Niña">
+              <a href="#" @click="changeCategory('Niña')"
                 class="flex items-center p-2 pl-11 w-full text-base font-medium text-primary-700 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                 <font-awesome-icon class="h-4 w-4 mr-2" :icon="['fas', 'child-dress']" />
                 Niña</a>
+              </router-link>
             </li>
             <li>
-              <a href="#"
+              <router-link to="/products/Niño">
+              <a href="#" @click="changeCategory('Niño')"
                 class="flex items-center p-2 pl-11 w-full text-base font-medium text-primary-700 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                 <font-awesome-icon class="h-4 w-4 mr-2" :icon="['fas', 'child']" />
                 Niño
               </a>
+            </router-link>
             </li>
           </ul>
         </li>
@@ -74,7 +82,7 @@
         <li>
           <router-link to="/products">
 
-            <a
+            <a @click="changeCategory('')"
               class="flex items-center p-2 pl-11 w-full text-base font-medium text-primary-700 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Productos</a>
           </router-link>
         </li>
@@ -98,19 +106,19 @@
               <h3>Tallas</h3>
             </li>
             <li class="flex items-center p-2 pl-11 w-full text-base font-medium text-primary-700 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
-              <input id="s-checkbox" type="checkbox" value="" v-model="sFilter" @change="applySizeFilter" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+              <input id="s-checkbox" type="checkbox" value="" v-model="filters.S"  @change="applyTimeFilter" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
               <label for="s-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">S</label>
             </li>
             <li class="flex items-center p-2 pl-11 w-full text-base font-medium text-primary-700 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
-              <input id="m-checkbox" type="checkbox" value="" v-model="mFilter" @change="applySizeFilter" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+              <input id="m-checkbox" type="checkbox" value="" v-model="filters.M" @change="applyTimeFilter"  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
               <label for="m-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">M</label>
             </li>
             <li class="flex items-center p-2 pl-11 w-full text-base font-medium text-primary-700 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
-              <input id="l-checkbox" type="checkbox" value="" v-model="lFilter" @change="applySizeFilter" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+              <input id="l-checkbox" type="checkbox" value="" v-model="filters.L" @change="applyTimeFilter"   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
               <label for="l-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">L</label>
             </li>
             <li class="flex items-center p-2 pl-11 w-full text-base font-medium text-primary-700 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
-              <input id="xl-checkbox" type="checkbox" value="" v-model="xlFilter" @change="applySizeFilter" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+              <input id="xl-checkbox" type="checkbox" value="" v-model="filters.XL" @change="applyTimeFilter"  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
               <label for="xl-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">XL</label>
             </li>
 
@@ -118,15 +126,15 @@
               <h3>Novedades</h3>
             </li>
             <li class="flex items-center p-2 pl-11 w-full text-base font-medium text-primary-700 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
-              <input id="today-checkbox" type="checkbox" value="" v-model="todayFilter" @change="applyTimeFilter" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+              <input id="today-checkbox" type="checkbox" value="" v-model="filters.today" @change="applyTimeFilter"   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
               <label for="today-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Hoy</label>
             </li>
             <li class="flex items-center p-2 pl-11 w-full text-base font-medium text-primary-700 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
-              <input id="this-week-checkbox" type="checkbox" value="" v-model="weekFilter" @change="applyTimeFilter" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+              <input id="this-week-checkbox" type="checkbox" value="" v-model="filters.week" @change="applyTimeFilter"  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
               <label for="this-week-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Esta semana</label>
             </li>
             <li class="flex items-center p-2 pl-11 w-full text-base font-medium text-primary-700 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
-              <input id="this-month-checkbox" type="checkbox" value="" v-model="monthFilter" @change="applyTimeFilter" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+              <input id="this-month-checkbox" type="checkbox" value="" v-model="filters.month" @change="applyTimeFilter" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
               <label for="this-month-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Últimos 30 días</label>
             </li>
 
@@ -217,38 +225,51 @@
   </aside>
 </template>
 
-// <script>
-import { EventBus } from '@/utils/event-bus.js';
+ <script lang="ts" setup >
 
-export default {
-  data() {
-    return {
-      sFilter: false,
-      mFilter: false,
-      xFilter: false,
-      xlFilter: false,
-      todayFilter: false,
-      weekFilter: false,
-      monthFilter: false
+import { capitalize, onMounted, ref, watch, watchEffect } from "vue";
+import { useAuthStore } from "@/stores/auth";
+import { useProductStore } from "@/stores/products";
+import { storeToRefs } from "pinia";
+import { useRoute } from "vue-router";
 
-    };
-  },
-  methods: {
-    applySizeFilter() {
-      this.$root.$emit('filter-changed', {
-        s: this.sFilter,
-        m: this.mFilter,
-      })
-    },
 
-    applyTimeFilter() {
-      this.$root.$emit('filter-changed', {
-        today: this.todayFilter,
-        week: this.weekFilter,
-        month: this.monthFilter
-      })
-    }
-  }
-  
+const AuthStore = useAuthStore();
+const ProductStore = useProductStore();
+
+const { getProducts } = ProductStore;
+const { user } = storeToRefs(AuthStore);
+
+const route = useRoute();
+
+const filters = ref({
+  category: "",
+  S: false,
+  M: false,
+  L: false,
+  XL: false,
+  today: false,
+  week: false,
+  month: false,
+});
+
+
+const changeCategory = (category: string) => {
+  filters.value.category = category;
+  getProducts(filters.value);
 };
+
+
+// Now, you can provide the dependencies in the array when necessary
+const applyTimeFilter = () => {
+  getProducts(filters.value);
+};
+
+onMounted(async () => {
+  if (route.params.category) {
+        filters.value.category = capitalize(route.params.category.toString());
+    }
+
+});
+
 </script>

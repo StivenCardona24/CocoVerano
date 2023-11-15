@@ -126,15 +126,18 @@ import { computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 
+import { useAuthStore } from "@/stores/auth";
 import { useProductStore } from "@/stores/products";
 import Category from '../../Interfaces/category';
 import Swal from 'sweetalert2'
-
+import { storeToRefs } from "pinia";
 
 
 const productStore = useProductStore();
 const { getProduct, createProduct, updateProduct, saveImage, deleteImage } = productStore;
 
+const authStore = useAuthStore();
+const { user } = storeToRefs(authStore);
 const router = useRouter();
 const route = useRoute();
 
@@ -240,6 +243,9 @@ const handleImageDelete = async (image: any) => {
 
 
 onMounted(async () => {
+    if(!user.value || user.value.role !== 'admin') {
+        router.push('/');
+    }
     if (route.params.id !== "new") {
         const data = await getProduct(route.params.id as string);
         product.value = data || product.value;
