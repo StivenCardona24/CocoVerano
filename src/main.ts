@@ -1,5 +1,4 @@
 import './assets/style.css'
-import './flowbite.ts';
 import { library } from '@fortawesome/fontawesome-svg-core'
 
 /* import font awesome icon component */
@@ -22,12 +21,16 @@ import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 
 
 import { createApp } from 'vue'
-import { createPinia } from 'pinia'
+import { createPinia, storeToRefs } from 'pinia'
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 
 import App from './App.vue'
 import router from './router'
+import { onAuthStateChanged } from 'firebase/auth';
+import { getAuth, getDb } from './firebase';
+import { useAuthStore } from './stores/auth';
+import { doc, getDoc } from 'firebase/firestore';
 
 /* add icons to the library */
 library.add(faUserSecret)
@@ -52,4 +55,39 @@ app.use(VueSweetalert2)
 app.use(createPinia())
 app.use(router)
 
-app.mount('#app')
+const initializeAppAndUser = async () => {
+    const authStore = useAuthStore()
+    const { user } = storeToRefs(authStore)
+    
+    const db = getDb()
+    const auth = getAuth();
+    
+    const userLogin:any = await new Promise((resolve) => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+          unsubscribe();
+          resolve(user);
+        });
+      });
+      if (userLogin) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/auth.user
+        const uid = userLogin.uid;
+        const UserDoc = doc(db, 'users', uid)
+        const productSnap = await getDoc(UserDoc)
+        user.value = productSnap.data()
+        
+      } else {
+        user.value = null
+      }
+    console.log(userLogin)
+
+}
+
+
+(async () => {
+    await initializeAppAndUser();
+    app.mount("#app");
+  })();
+
+
+
