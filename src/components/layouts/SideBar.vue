@@ -72,6 +72,14 @@
         </li>
 
         <li>
+          <router-link to="/products">
+
+            <a
+              class="flex items-center p-2 pl-11 w-full text-base font-medium text-primary-700 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Productos</a>
+          </router-link>
+        </li>
+
+        <li>
           <button type="button"
             class="flex items-center p-2 w-full text-base font-medium text-primary-700 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
             aria-controls="dropdown-filter" data-collapse-toggle="dropdown-filter">
@@ -85,13 +93,6 @@
             </svg>
           </button>
           <ul id="dropdown-filter" class="hidden py-2 space-y-2">
-            <li>
-              <router-link to="/manageProducts">
-
-                <a
-                  class="flex items-center p-2 pl-11 w-full text-base font-medium text-primary-700 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Products</a>
-              </router-link>
-            </li>
 
             <li class="flex items-center p-2 pl-11 w-full text-base font-medium text-primary-700 rounded-lg transition duration-75 group">
               <h3>Tallas</h3>
