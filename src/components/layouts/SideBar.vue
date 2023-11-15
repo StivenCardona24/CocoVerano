@@ -217,7 +217,9 @@
   </aside>
 </template>
 
-<script>
+// <script>
+import { EventBus } from '@/utils/event-bus.js';
+
 export default {
   data() {
     return {
@@ -231,33 +233,22 @@ export default {
 
     };
   },
-  computed: {
-    productosFiltrados() {
-      // Lógica para filtrar los productos según los checkboxes seleccionados
-      let productosFiltrados = this.productos;
-
-      if (this.filtroHombre) {
-        productosFiltrados = productosFiltrados.filter(producto => producto.categoria === 'hombre');
-      }
-
-      if (this.filtroMujer) {
-        productosFiltrados = productosFiltrados.filter(producto => producto.categoria === 'mujer');
-      }
-
-      // Agrega más lógica de filtrado según tus necesidades
-      // ...
-
-      return productosFiltrados;
-    },
-  },
   methods: {
     applySizeFilter() {
-      
+      this.$root.$emit('filter-changed', {
+        s: this.sFilter,
+        m: this.mFilter,
+      })
     },
 
     applyTimeFilter() {
-      
+      this.$root.$emit('filter-changed', {
+        today: this.todayFilter,
+        week: this.weekFilter,
+        month: this.monthFilter
+      })
     }
-  },
+  }
+  
 };
 </script>

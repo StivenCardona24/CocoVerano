@@ -58,6 +58,7 @@
 </template>
 
 <script lang="ts" setup>
+import { EventBus } from '@/utils/event-bus.js';
 import { ref, onMounted } from "vue";
 import { useProductStore } from "@/stores/products";
 
