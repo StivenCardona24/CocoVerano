@@ -85,8 +85,21 @@
             </svg>
           </button>
         
+          <button v-if="!user" type="button" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4
+           focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-primary-600
+            dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800" 
+            @click="toggleLogin">
+            Iniciar Sesión
+          </button>
+          <button v-if="!user" type="button" class="text-white bg-warning-700 hover:bg-warning-800 focus:ring-4
+           focus:ring-warning-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-warning-600
+            dark:hover:bg-warning-700 focus:outline-none dark:focus:ring-warning-800" 
+            @click="toggleRegister">
+            Registrate
+          </button>
           <!-- Apps -->
           <button
+            v-if="user"
             type="button"
             data-dropdown-toggle="apps-dropdown"
             class="p-2 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
@@ -106,6 +119,7 @@
           </button>
           <!-- Dropdown menu -->
           <div
+            v-if="user"
             class="hidden overflow-hidden z-50 my-4 max-w-sm text-base list-none bg-white rounded divide-y divide-gray-100 shadow-lg dark:bg-gray-700 dark:divide-gray-600 rounded-xl"
             id="apps-dropdown"
           >
@@ -219,6 +233,7 @@
              
               <a
                 href="#"
+                @click="logout"
                 class="block p-4 text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 group"
               >
                 <svg
@@ -236,13 +251,14 @@
                     d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
                   ></path>
                 </svg>
-                <div class="text-sm text-gray-900 dark:text-white">
+                <div  class="text-sm text-gray-900 dark:text-white">
                   Logout
                 </div>
               </a>
             </div>
           </div>
           <button
+            v-if="user"
             type="button"
             class="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
             id="user-menu-button"
@@ -258,6 +274,7 @@
           </button>
           <!-- Dropdown menu -->
           <div
+            v-if="user"
             class="hidden z-50 my-4 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 rounded-xl"
             id="dropdown"
           >
@@ -306,4 +323,28 @@
         </div>
       </div>
     </nav>
+    
 </template>
+
+<script lang="ts" setup>
+
+import { useAuthStore } from '@/stores/auth';
+import { storeToRefs } from 'pinia';
+import { onBeforeMount, onUpdated } from 'vue';
+const authStore = useAuthStore();
+const { toggleLogin, logout, toggleRegister } = authStore;
+const { user } = storeToRefs(authStore);
+
+import { onMounted } from 'vue'
+import { initFlowbite } from 'flowbite'
+
+// initialize components based on data attribute selectors
+onMounted(() => {
+    initFlowbite();
+})
+
+onUpdated(() => {
+  initFlowbite();
+});
+
+</script>

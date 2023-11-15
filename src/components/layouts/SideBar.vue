@@ -20,7 +20,7 @@
         </div>
       </form>
       <ul class="space-y-2">
-        <li>
+        <li v-if=" user && user.role == 'admin'">
           <a href="#"
             class="flex items-center p-2 text-base font-medium text-primary-700 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
             <font-awesome-icon class="w-6 h-6 " :icon="['fas', 'chart-pie']" />
@@ -103,7 +103,7 @@
           </ul>
         </li>
 
-        <li>
+        <li v-if="user">
           <button type="button"
             class="flex items-center p-2 w-full text-base font-medium text-primary-700 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
             <font-awesome-icon class="w-6 h-6" :icon="['fas', 'bag-shopping']" />
@@ -113,7 +113,7 @@
         </li>
 
 
-        <li>
+        <li  v-if="user && user.role == 'admin'">
           <button type="button"
             class="flex items-center p-2 w-full text-base font-medium text-primary-700 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
             aria-controls="dropdown-manage" data-collapse-toggle="dropdown-manage">
@@ -150,7 +150,7 @@
         </li>
 
 
-        <li>
+        <li v-if="!user">
           <button type="button"
             class="flex items-center p-2 w-full text-base font-medium text-primary-700 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
             aria-controls="dropdown-authentication" data-collapse-toggle="dropdown-authentication">
@@ -496,3 +496,21 @@
       </div> -->
   </aside>
 </template>
+
+<script lang="ts" setup>
+import { onMounted, onUpdated } from 'vue'
+import { initFlowbite } from 'flowbite'
+import { useAuthStore } from '@/stores/auth';
+import { storeToRefs } from 'pinia';
+
+const authStore = useAuthStore();
+const { user } = storeToRefs(authStore);
+// initialize components based on data attribute selectors
+onMounted(() => {
+    initFlowbite();
+})
+
+onUpdated(() => {
+  initFlowbite();
+});
+</script>
