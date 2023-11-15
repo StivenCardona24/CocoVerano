@@ -83,10 +83,11 @@ const initializeAppAndUser = async () => {
 
 }
 
-await initializeAppAndUser();
 
-
-app.mount('#app')
+(async () => {
+    await initializeAppAndUser();
+    app.mount("#app");
+  })();
 
 
 
