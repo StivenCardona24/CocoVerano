@@ -21,7 +21,14 @@
     "target": "es5",
     "allowJs": true,
     "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
 },
 "include": ["src/**/*.ts*"],
-"exclude": ["node_modules", "dist", "lib"]
+"exclude": ["node_modules", "dist", "lib"],
+"types": [
+  "vue-sweetalert2"
+],
 }

@@ -1,7 +1,7 @@
 <template>
-    <tTable :items="products" :headers="headers" :loading="loadingProducts">
+    <TTable :items="products" :headers="headers" :loading="loadingProducts">
         <template #column-image="{ item }">
-            <img class="w-12 h-12 rounded-full" :src="item.images[0]" alt="Jese image">
+            <img class="w-16 md:w-32 max-w-full max-h-full" :src="item.images[0].url" :alt="item.name">
         </template>
         <template #column-status="{ item }">
             <span class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">{{
@@ -25,7 +25,7 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import { onMounted } from "vue";
-import tTable from "@/components/general/T-Table.vue";
+import TTable from "@/components/general/T-Table.vue";
 
 
 

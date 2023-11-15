@@ -2,7 +2,7 @@
     <headerTable>
         <!-- Contenido personalizado para el input -->
         <template #search-input>
-            <t-input type="text" id="searchManageProduct" label="Buscar Producto">
+            <t-input type="text" id="searchManageProduct" label="Buscar Producto" v-model="search">
                 <template #icon>
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                         <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
@@ -33,8 +33,9 @@ import { useRouter } from 'vue-router';
 import headerTable from '@/components/general/HeaderTable.vue';
 import tButton from '@/components/general/T-Button.vue';
 import tInput from '@/components/general/T-Input.vue';
+import { ref } from 'vue';
 
-
+const search = ref('');
 const router = useRouter();
 const createProduct = () => {
     router.push({ name: "manageProduct", params: { id: "new" } });
