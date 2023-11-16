@@ -32,22 +32,22 @@ const categories = [
     {
     name: "Mujeres",
     description: "Aquí encontrarás una exquisita selección de los vestidos de baño más elegantes y a la moda diseñados especialmente para mujeres.",
-    image: "/src/assets/Images/Mujeres.jpg",
+    image: "/src/assets/Images/Mujeres.png",
 },
 {
     name: "Hombres",
     description: "Aquí descubrirás una destacada variedad de vestidos de baño diseñados con estilo y elegancia, pensados exclusivamente para hombres.",
-    image: "/src/assets/Images/Hombres.jpeg",
+    image: "/src/assets/Images/Hombres.png",
 },
 {
     name: "Niños",
     description: "Explora nuestra colección de trajes de baño para niños, llena de colores vibrantes y diseños divertidos. ",
-    image: "/src/assets/Images/nino.jpg",
+    image: "/src/assets/Images/nino.png",
 },
 {
     name: "Niñas",
     description: "Descubre la moda de trajes de baño para niñas con nuestra exclusiva selección. Para que las niñas disfruten de sus días de sol con confianza y estilo.",
-    image: "/src/assets/Images/nina.jpg",
+    image: "/src/assets/Images/nina.png",
 },
 
 ]

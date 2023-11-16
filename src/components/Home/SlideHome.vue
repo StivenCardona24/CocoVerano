@@ -52,10 +52,10 @@
 
 
 const images = [
-    '/src/assets/Images/Carousel1.jpg',
-    '/src/assets/Images/carousel2.jpg',
-    '/src/assets/Images/carousel3.jpg',
-    '/src/assets/Images/carousel4.jpg',
+    '/src/assets/Images/Carousel1.png',
+    '/src/assets/Images/carousel2.png',
+    '/src/assets/Images/carousel3.png',
+    '/src/assets/Images/carousel4.png',
 ]
 
 </script>
