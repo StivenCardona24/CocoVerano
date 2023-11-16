@@ -52,10 +52,10 @@
 
 
 const images = [
-    '/src/assets/Images/Carousel1.png',
-    '/src/assets/Images/carousel2.png',
-    '/src/assets/Images/carousel3.png',
-    '/src/assets/Images/carousel4.png',
+    'https://firebasestorage.googleapis.com/v0/b/cocoverano-8df51.appspot.com/o/images%2FAssets%2FCarousel1.jpg?alt=media&token=e79cd34b-c408-408c-ae81-9e1b8901f5b2',
+    'https://firebasestorage.googleapis.com/v0/b/cocoverano-8df51.appspot.com/o/images%2FAssets%2Fcarousel2.jpg?alt=media&token=e79cd34b-c408-408c-ae81-9e1b8901f5b2',
+    'https://firebasestorage.googleapis.com/v0/b/cocoverano-8df51.appspot.com/o/images%2FAssets%2Fcarousel3.jpg?alt=media&token=e79cd34b-c408-408c-ae81-9e1b8901f5b2',
+    'https://firebasestorage.googleapis.com/v0/b/cocoverano-8df51.appspot.com/o/images%2FAssets%2Fcarousel4.jpg?alt=media&token=e79cd34b-c408-408c-ae81-9e1b8901f5b2',
 ]
 
 </script>

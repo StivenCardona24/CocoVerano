@@ -32,22 +32,22 @@ const categories = [
     {
     name: "Mujeres",
     description: "Aquí encontrarás una exquisita selección de los vestidos de baño más elegantes y a la moda diseñados especialmente para mujeres.",
-    image: "/src/assets/Images/Mujeres.png",
+    image: "https://firebasestorage.googleapis.com/v0/b/cocoverano-8df51.appspot.com/o/images%2FAssets%2FMujeres.jpg?alt=media&token=e79cd34b-c408-408c-ae81-9e1b8901f5b2",
 },
 {
     name: "Hombres",
     description: "Aquí descubrirás una destacada variedad de vestidos de baño diseñados con estilo y elegancia, pensados exclusivamente para hombres.",
-    image: "/src/assets/Images/Hombres.png",
+    image: "https://firebasestorage.googleapis.com/v0/b/cocoverano-8df51.appspot.com/o/images%2FAssets%2FHombres.jpeg?alt=media&token=e79cd34b-c408-408c-ae81-9e1b8901f5b2",
 },
 {
     name: "Niños",
     description: "Explora nuestra colección de trajes de baño para niños, llena de colores vibrantes y diseños divertidos. ",
-    image: "/src/assets/Images/nino.png",
+    image: "https://firebasestorage.googleapis.com/v0/b/cocoverano-8df51.appspot.com/o/images%2FAssets%2Fnina.jpg?alt=media&token=e79cd34b-c408-408c-ae81-9e1b8901f5b2",
 },
 {
     name: "Niñas",
     description: "Descubre la moda de trajes de baño para niñas con nuestra exclusiva selección. Para que las niñas disfruten de sus días de sol con confianza y estilo.",
-    image: "/src/assets/Images/nina.png",
+    image: "https://firebasestorage.googleapis.com/v0/b/cocoverano-8df51.appspot.com/o/images%2FAssets%2Fnino.jpg?alt=media&token=e79cd34b-c408-408c-ae81-9e1b8901f5b2",
 },
 
 ]
